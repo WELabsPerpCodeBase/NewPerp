@@ -11,7 +11,6 @@ import "../pool/IPoolToken.sol";
 import "../oracle/PriceLib.sol";
 import "../vault/VaultLib.sol";
 import "../exception/Errs.sol";
-import "hardhat/console.sol";
 
 library PositionLib {
     struct Position {
@@ -320,42 +319,36 @@ library PositionLib {
 
     function addBytes32(DataBase _dataBase, bytes32 _setKey, bytes32 _value) internal {
         if (!_dataBase.containsBytes32(_setKey, _value)) {
-            console.log("---dataBase.addBytes32(%s)", string(abi.encodePacked(_value)));
             _dataBase.addBytes32(_setKey, _value);
         }
     }
 
     function removeBytes32(DataBase _dataBase, bytes32 _setKey, bytes32 _value) internal {
         if (!_dataBase.containsBytes32(_setKey, _value)) {
-            console.log("---dataBase.removeBytes32(%s)", string(abi.encodePacked(_value)));
             _dataBase.removeBytes32(_setKey, _value);
         }
     }
 
     function setAddress(DataBase _dataBase, bytes32 _key, address _value) internal {
         if (_dataBase.getAddress(_key) != _value) {
-            console.log("---dataBase.setAddress(%s)", _value);
             _dataBase.setAddress(_key, _value);
         }
     }
 
     function setUint(DataBase _dataBase, bytes32 _key, uint256 _value) internal {
         if (_dataBase.getUint(_key) != _value) {
-            console.log("---dataBase.setUint(%s)", _value);
             _dataBase.setUint(_key, _value);
         }
     }
 
     function setInt(DataBase _dataBase, bytes32 _key, int256 _value) internal {
         if (_dataBase.getInt(_key) != _value) {
-            console.log("---dataBase.setInt(%d)");
             _dataBase.setInt(_key, _value);
         }
     }
 
     function setBool(DataBase _dataBase, bytes32 _key, bool _value) internal {
         if (_dataBase.getBool(_key) != _value) {
-            console.log("---dataBase.setBool(%s)", _value);
             _dataBase.setBool(_key, _value);
         }
     }

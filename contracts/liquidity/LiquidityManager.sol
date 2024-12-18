@@ -110,7 +110,7 @@ contract LiquidityManager is ILiquidityManager, ReentrancyGuard {
     }
 
     function addLiquidityForAccount(address _fundingAccount, address _account, address _poolToken, address _token, uint256 _amount, uint256 _minUsdg, uint256 _minLp)
-            external nonReentrant onlyHandler returns (uint256) {
+    external nonReentrant onlyHandler returns (uint256) {
         return _addLiquidity(_fundingAccount, _account, _poolToken, _token, _amount, _minUsdg, _minLp);
     }
 
@@ -119,7 +119,7 @@ contract LiquidityManager is ILiquidityManager, ReentrancyGuard {
     }
 
     function removeLiquidityForAccount(address _account, address _poolToken, address _tokenOut, uint256 _lpAmount, uint256 _minOut, address _receiver)
-            external nonReentrant onlyHandler returns (uint256) {
+    external nonReentrant onlyHandler returns (uint256) {
         return _removeLiquidity(_account, _poolToken, _tokenOut, _lpAmount, _minOut, _receiver);
     }
 

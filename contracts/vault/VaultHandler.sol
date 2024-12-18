@@ -131,10 +131,10 @@ contract VaultHandler is ReentrancyGuard, IVaultHandler {
     }
 
     function getBuyUsdgFeeBasisPoints(address _poolToken, address _token, uint256 _usdgAmount) internal view returns (uint256) {
-        return VaultLib.getFeeBasisPoints(dataBase, _poolToken, _token, _usdgAmount, Dao.mintBurnFeeBasisPoints(dataBase, _poolToken), Dao.taxBasisPoints(dataBase, _poolToken), true);
+        return VaultLib.getFeeBasisPoints(dataBase, _poolToken, _token, _usdgAmount, Dao.mintFeeBasisPoints(dataBase, _poolToken), Dao.taxBasisPoints(dataBase, _poolToken), true);
     }
 
     function getSellUsdgFeeBasisPoints(address _poolToken, address _token, uint256 _usdgAmount) internal view returns (uint256) {
-        return VaultLib.getFeeBasisPoints(dataBase, _poolToken, _token, _usdgAmount, Dao.mintBurnFeeBasisPoints(dataBase, _poolToken), Dao.taxBasisPoints(dataBase, _poolToken), false);
+        return VaultLib.getFeeBasisPoints(dataBase, _poolToken, _token, _usdgAmount, Dao.burnFeeBasisPoints(dataBase, _poolToken), Dao.taxBasisPoints(dataBase, _poolToken), false);
     }
 }

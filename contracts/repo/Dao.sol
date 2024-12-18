@@ -185,12 +185,20 @@ library Dao {
         _dataBase.setUint(Keys.taxBasisPoints(_poolToken), _value);
     }
 
-    function mintBurnFeeBasisPoints(DataBase _dataBase, address _poolToken) internal view returns (uint256) {
-        return _dataBase.getUint(Keys.mintBurnFeeBasisPoints(_poolToken));
+    function mintFeeBasisPoints(DataBase _dataBase, address _poolToken) internal view returns (uint256) {
+        return _dataBase.getUint(Keys.mintFeeBasisPoints(_poolToken));
     }
 
-    function setMintBurnFeeBasisPoints(DataBase _dataBase, address _poolToken, uint256 _value) internal {
-        _dataBase.setUint(Keys.mintBurnFeeBasisPoints(_poolToken), _value);
+    function setMintFeeBasisPoints(DataBase _dataBase, address _poolToken, uint256 _value) internal {
+        _dataBase.setUint(Keys.mintFeeBasisPoints(_poolToken), _value);
+    }
+
+    function burnFeeBasisPoints(DataBase _dataBase, address _poolToken) internal view returns (uint256) {
+        return _dataBase.getUint(Keys.burnFeeBasisPoints(_poolToken));
+    }
+
+    function setBurnFeeBasisPoints(DataBase _dataBase, address _poolToken, uint256 _value) internal {
+        _dataBase.setUint(Keys.burnFeeBasisPoints(_poolToken), _value);
     }
 
     function stableSwapFeeBasisPoints(DataBase _dataBase, address _poolToken) internal view returns (uint256) {

@@ -92,8 +92,10 @@ contract LiquidityManager is ILiquidityManager, ReentrancyGuard {
     }
 
     function setGov(address _gov) external onlyGov {
-        gov = _gov;
-        emit UpdateGov(_gov);
+        if (_gov != address(0)) {
+            gov = _gov;
+            emit UpdateGov(_gov);
+        }
     }
 
     function setHandler(address _handler, bool _isActive) external onlyGov {
@@ -172,7 +174,7 @@ contract LiquidityManager is ILiquidityManager, ReentrancyGuard {
 
         IPoolToken(_poolToken).burn(_account, _lpAmount);
 
-        IERC20(usdg).transfer(vaultHandler, usdgAmount);
+        IERC20(usdg).safeTransfer(vaultHandler, usdgAmount);
         uint256 amountOut = IVaultHandler(vaultHandler).sellUSDG(_poolToken, _tokenOut, _receiver);
         if (amountOut < _minOut) {
             revert InsufficientTokenOut(_tokenOut, amountOut, _minOut);

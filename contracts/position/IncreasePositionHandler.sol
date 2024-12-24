@@ -70,8 +70,10 @@ contract IncreasePositionHandler is ReentrancyGuard, IIncreasePositionHandler {
     }
 
     function setGov(address _gov) external onlyGov {
-        gov = _gov;
-        emit UpdateGov(_gov);
+        if (_gov != address(0)) {
+            gov = _gov;
+            emit UpdateGov(_gov);
+        }
     }
 
     function setHandler(address _handler, bool _isActive) external onlyGov {

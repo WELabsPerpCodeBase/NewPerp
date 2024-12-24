@@ -145,7 +145,7 @@ library PositionLib {
     }
 
     function getDelta(DataBase _dataBase, address _indexToken, uint256 _size, uint256 _averagePrice, bool _isLong, uint256 /*_lastIncreasedTime*/) internal view returns (bool, uint256) {
-        if (_averagePrice <= 0) {
+        if (_averagePrice == 0) {
             revert Errs.InvalidAveragePrice();
         }
         uint256 price = _isLong ? PriceLib.pricesMin(_dataBase, _indexToken) : PriceLib.pricesMax(_dataBase, _indexToken);

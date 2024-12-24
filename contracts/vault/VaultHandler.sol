@@ -51,8 +51,10 @@ contract VaultHandler is ReentrancyGuard, IVaultHandler {
     }
 
     function setGov(address _gov) external onlyGov {
-        gov = _gov;
-        emit UpdateGov(_gov);
+        if (_gov != address(0)) {
+            gov = _gov;
+            emit UpdateGov(_gov);
+        }
     }
 
     function initialize(address _usdg) external onlyGov {

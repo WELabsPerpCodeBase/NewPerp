@@ -41,6 +41,7 @@ library VaultLib {
     error PoolLessThanBuffer(address poolToken, address token, uint256 poolAmount, uint256 bufferAmount);
     error ReservedExceedsPool(address poolToken, address token, uint256 reservedAmount, uint256 poolAmount);
     error InsufficientReserved(address poolToken, address token, uint256 reservedAmount, uint256 decAmount);
+    error DivedByZero();
 
     function getFeeBasisPoints(DataBase _dataBase, address _poolToken, address /*_token*/, uint256 /*_usdgDelta*/, uint256 _feeBasisPoints, uint256 /*_taxBasisPoints*/, bool /*_increment*/) internal view returns (uint256) {
         if (!Dao.hasDynamicFees(_dataBase, _poolToken)) { return _feeBasisPoints; }
@@ -245,6 +246,9 @@ library VaultLib {
 
         uint256 nextSize = size + _sizeDelta;
         uint256 divisor = hasProfit ? nextSize - delta : nextSize + delta;
+        if (divisor == 0) {
+            revert DivedByZero();
+        }
 
         return _nextPrice * nextSize / divisor;
     }
